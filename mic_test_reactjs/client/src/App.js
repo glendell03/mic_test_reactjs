@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Login from "./component/auth/Login";
-import Register from "./component/auth/Register";
-import Landing from "./component/Landing";
+import Login from "./component/auth/login";
+import Register from "./component/auth/register";
+import Landing from "./component/landing";
 
 export default function App() {
   return (
