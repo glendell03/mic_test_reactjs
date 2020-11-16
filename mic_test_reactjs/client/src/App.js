@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Landing from "./components/Landing";
@@ -9,13 +9,13 @@ export default function App() {
     <Router>
       <Switch>
         <Route path="/login">
-          <Login/>
+          <Login />
         </Route>
         <Route path="/register">
-          <Register/>
+          <Register />
         </Route>
         <Route path="/">
-          <Landing/>
+          <Landing />
         </Route>
       </Switch>
     </Router>
