@@ -35,13 +35,14 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
       const doc = await db.doc(`/users/${handle}`).get();
       if (doc.exists) {
         return res.status(400).json({ handle: "this handle is already taken" });
       }
-      const data = await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password);
+      const data = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(newUser.email, newUser.password);
       const userId = await data.user.uid;
       const token = await data.user.getIdToken();
       const userCredentials = {
