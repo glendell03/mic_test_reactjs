@@ -1,7 +1,12 @@
-const { db } = require("../db");
+const { db } = require("../util/admin");
 const express = require("express");
 const router = express.Router();
-const { check, validationResult, body } = require("express-validator");
+const config = require("../util/config");
+const firebase = require("firebase");
+
+firebase.initializeApp(config);
+
+const { check, validationResult } = require("express-validator");
 
 router.post(
   "/register",
