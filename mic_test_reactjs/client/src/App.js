@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -20,7 +20,7 @@ export default function App() {
   useEffect(() => {
     checkAuthenticated();
     console.log("rendered");
-  }, [ isAuthenticated ]);
+  }, [isAuthenticated]);
 
   return (
     <Router>
@@ -41,8 +41,7 @@ export default function App() {
         </Route>
         <Route path="/">
           {isAuthenticated ? (
-            <Landing setIsAuthenticated={
-    setIsAuthenticated} />
+            <Landing setIsAuthenticated={setIsAuthenticated} />
           ) : (
             <Redirect to="/login" />
           )}
