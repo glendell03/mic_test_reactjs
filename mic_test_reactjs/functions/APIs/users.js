@@ -31,12 +31,10 @@ router.post(
       confirmPassword,
       handle,
     };
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
       const doc = await db.doc(`/users/${handle}`).get();
       if (doc.exists) {
@@ -57,6 +55,7 @@ router.post(
       await db.doc(`/users/${newUser.handle}`).set(userCredentials);
       return await res.status(201).json({ token });
     } catch (err) {
+      console.log("May", err);
       if (err.code === "auth/email-already-in-use") {
         return res.status(400).json({ email: "Email already in user" });
       }
