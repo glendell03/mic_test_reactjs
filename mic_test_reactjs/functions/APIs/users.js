@@ -65,4 +65,39 @@ router.post(
   }
 );
 
+router.get(
+  "/login",
+  [
+    check("email", "Invalid Email").isEmail(),
+    check("password", "Incorrect Password").not().isEmpty(),
+  ],
+  async (req, res) => {
+    const { email, password } = req.body;
+    const user = {
+      email,
+      password,
+    };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const data = await firebase
+        .auth()
+        .signInWithEmailAndPassword(user.email, user.password);
+      const token = await data.user.getIdToken();
+      return await res.json({ token });
+    } catch (err) {
+      if (err.code === "auth/wrong-password") {
+        return res
+          .status(403)
+          .json({ general: "Wrong credentials, please try again" });
+      }
+      return res.status(500).json({ error: err.code });
+    }
+  }
+);
+
 module.exports = router;
